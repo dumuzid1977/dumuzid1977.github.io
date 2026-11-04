@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Schottland 2027</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field journal — two chapter bands (Edinburgh, Atholl) with photo plates, a day ledger, then the money. */
+:root{
+  --paper:#f2f5f3; --card:#ffffff; --ink:#132120; --muted:#55686a; --line:#d3ddda;
+  --loch:#1c4e4a; --heather:#7a3d6c; --bracken:#b25f22; --moss:#3f6b3a;
+  --chip-h:#f1e4ee; --chip-f:#e2efec; --chip-a:#f6e9dc;
+  --display:"Gloock", "Georgia", "Times New Roman", serif;
+  --body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "Consolas", monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0e1716; --card:#15211f; --ink:#e4ecea; --muted:#9db0ad; --line:#263b38;
+  --loch:#74b8ae; --heather:#d495c3; --bracken:#e8a066; --moss:#9cc58f;
+  --chip-h:#3a2234; --chip-f:#1d3532; --chip-a:#3a2a1c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0e1716; --card:#15211f; --ink:#e4ecea; --muted:#9db0ad; --line:#263b38;
+  --loch:#74b8ae; --heather:#d495c3; --bracken:#e8a066; --moss:#9cc58f;
+  --chip-h:#3a2234; --chip-f:#1d3532; --chip-a:#3a2a1c; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--loch);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--bracken);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* Hero */
+.hero{position:relative;background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Blair_Castle%2C_Perthshire_-_geograph.org.uk_-_5918886.jpg/1920px-Blair_Castle%2C_Perthshire_-_geograph.org.uk_-_5918886.jpg');min-height:min(78vh,640px);display:flex;align-items:flex-end;color:#fff;background-color:#24413f;background-position:center;background-size:cover;background-repeat:no-repeat;}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,19,.15) 0%,rgba(10,20,19,.25) 40%,rgba(10,20,19,.85) 100%)}
+.hero .wrap{position:relative;width:100%;padding-block:56px 40px}
+.hero .eyebrow{color:#dfe9e6}
+.hero h1{font-size:clamp(56px,11vw,132px);letter-spacing:-.01em;margin:10px 0 14px}
+.hero h1 em{font-style:normal;color:#f1c29a}
+.hero .lede{max-width:46ch;font-size:clamp(17px,2.2vw,21px);color:#eef4f2}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.3)}
+.facts div{display:flex;flex-direction:column;gap:2px}
+.facts b{font:500 22px/1.1 var(--mono)}
+.facts span{font-size:13px;color:#d6e2df}
+.credit-tag{position:absolute;right:max(10px, env(safe-area-inset-right, 0px));top:10px;font:11px var(--mono);color:rgba(255,255,255,.75)}
+
+/* Nav */
+nav.jump{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--paper)}
+nav.jump .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.jump a{flex:none;text-decoration:none;color:var(--ink);font-weight:600;font-size:14px;padding:7px 12px;border-radius:999px}
+nav.jump a:hover{background:var(--chip-f)}
+
+section{padding-block:64px}
+.sec-head{display:grid;gap:10px;margin-bottom:28px;max-width:720px}
+.sec-head h2{font-size:clamp(34px,5vw,52px)}
+.sec-head p{color:var(--muted);font-size:17px}
+
+/* Route */
+.route{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;overflow-x:auto}
+.route svg{display:block;min-width:720px;width:100%;height:auto}
+.route text{font-family:var(--body);fill:var(--ink)}
+.route .small{font-size:12px;fill:var(--muted);font-family:var(--mono)}
+
+/* Chapters */
+.chapter{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:end;margin-bottom:28px}
+.chapter .plate{border-radius:var(--r);overflow:hidden;aspect-ratio:16/10;max-width:100%;background:var(--line)}
+.chapter .plate img{width:100%;height:100%;object-fit:cover;display:block}
+.chapter .txt{display:grid;gap:12px;min-width:0}
+.chapter h3{font-size:clamp(30px,4vw,44px)}
+.chapter .where{font:500 14px var(--mono);color:var(--bracken)}
+@media (max-width:760px){.chapter{grid-template-columns:1fr}}
+
+/* Day ledger */
+.days{display:grid;gap:0;border-top:1px solid var(--line);margin-bottom:56px}
+.day{display:grid;grid-template-columns:120px 1fr 220px;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);align-items:start}
+.day .date{display:grid;gap:2px}
+.day .date .d{font:400 34px/1 var(--display)}
+.day .date .w{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.day .body{display:grid;gap:8px;min-width:0}
+.day h4{margin:0;font-size:19px;font-weight:700}
+.day ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.day li{display:flex;gap:10px;align-items:baseline}
+.chip{flex:none;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:6px;white-space:nowrap}
+.chip.all{background:var(--chip-f);color:var(--loch)}
+.chip.hunt{background:var(--chip-a);color:var(--bracken)}
+.chip.fam{background:var(--chip-h);color:var(--heather)}
+.day .pic{border-radius:10px;overflow:hidden;aspect-ratio:4/3;max-width:100%;background:var(--line)}
+.day .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.day .note{font-size:14px;color:var(--muted)}
+@media (max-width:820px){.day{grid-template-columns:84px 1fr}.day .pic{grid-column:1/-1;aspect-ratio:16/9}}
+
+/* Hunting */
+.hunt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.hcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.hcard img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;max-width:100%}
+.hcard .in{padding:20px;display:grid;gap:12px}
+.hcard h3{font-size:28px}
+.hcard .who{font:500 13px var(--mono);color:var(--bracken);letter-spacing:.06em;text-transform:uppercase}
+.price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price b{font:500 32px/1 var(--mono)}
+.price span{color:var(--muted);font-size:14px}
+.kv{display:grid;gap:6px;margin:0;padding:0;list-style:none;font-size:15px}
+.kv li{display:flex;justify-content:space-between;gap:16px;border-top:1px dashed var(--line);padding-top:6px}
+.kv li span:last-child{font-family:var(--mono);white-space:nowrap}
+.facts-band{margin-top:20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.facts-band div{border-left:3px solid var(--bracken);padding-left:14px;font-size:15px}
+.facts-band b{display:block;margin-bottom:2px}
+@media (max-width:760px){.hunt-grid,.facts-band{grid-template-columns:1fr}}
+
+/* Stay */
+.stay-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:start}
+.farm{background:var(--loch);color:#fff;border-radius:var(--r);padding:28px;display:grid;gap:14px}
+.farm h3{font-size:34px}
+.farm .eyebrow{color:#cfe3df}
+.farm ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.farm .badge{justify-self:start;background:#f1c29a;color:#2b1a0c;font:600 12px var(--mono);padding:6px 10px;border-radius:6px;letter-spacing:.04em}
+.farm .big{font:500 36px/1 var(--mono)}
+.flats{display:grid;gap:12px}
+.flat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:6px}
+.flat h4{margin:0;font-size:17px}
+.flat p{font-size:14px;color:var(--muted)}
+.flat a{font-weight:600;font-size:14px}
+@media (max-width:820px){.stay-grid{grid-template-columns:1fr}}
+
+/* Activities */
+.acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.act{display:grid;gap:10px;align-content:start}
+.act .ph{border-radius:12px;overflow:hidden;aspect-ratio:3/2;background:var(--line);max-width:100%}
+.act .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.act h4{margin:0;font-size:18px}
+.act p{font-size:15px;color:var(--muted)}
+.act .meta{font:500 13px var(--mono);color:var(--heather)}
+@media (max-width:900px){.acts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.acts{grid-template-columns:1fr}}
+
+/* Budget */
+.budget{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:start}
+.tbl-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+td.r,th.r{text-align:right;font-family:var(--mono);white-space:nowrap}
+tr.total td{font-weight:700;border-bottom:none;font-size:17px}
+.st{font:600 11px var(--mono);padding:3px 7px;border-radius:5px;white-space:nowrap}
+.st.q{background:var(--chip-f);color:var(--loch)}
+.st.e{background:var(--chip-a);color:var(--bracken)}
+.split{display:grid;gap:16px}
+.split .box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:6px}
+.split .box b{font:500 34px/1 var(--mono)}
+.split .box span{color:var(--muted);font-size:14px}
+.split .box.accent{background:var(--heather);border-color:var(--heather);color:#fff}
+.split .box.accent span{color:#f3dcec}
+.bar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+@media (max-width:860px){.budget{grid-template-columns:1fr}}
+
+/* Videos */
+.vids{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.vid{position:relative;display:block;border-radius:12px;overflow:hidden;aspect-ratio:16/9;text-decoration:none;color:#fff;background:#1c2b2a center/cover}
+.vid::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.7))}
+.vid .play{position:absolute;left:16px;top:16px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;transition:transform .2s}
+.vid .play::after{content:"";border-left:14px solid #b0242a;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.vid:hover .play{transform:scale(1.08)}
+.vid span{position:absolute;left:16px;right:16px;bottom:14px;font-weight:700;font-size:16px;line-height:1.3}
+@media (max-width:820px){.vids{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.vids{grid-template-columns:1fr}}
+
+/* Checklist */
+.todo{display:grid;gap:10px;max-width:780px}
+.todo li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.todo{padding:0;margin:0}
+.todo .dot{width:12px;height:12px;border-radius:50%;margin-top:7px}
+.todo b{display:block}
+.todo span{color:var(--muted);font-size:14px}
+
+footer{padding-block:40px 56px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+footer p+p{margin-top:8px}
+footer a{color:var(--muted)}
+
+@media (prefers-reduced-motion: no-preference){
+  .hero h1,.hero .lede,.facts{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+  .hero .lede{animation-delay:.12s}.facts{animation-delay:.24s}
+  @keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+}
+.vid{background-size:cover;background-position:center}
+.train{display:grid;grid-template-columns:1fr 1.1fr;gap:24px;align-items:stretch;margin-top:20px}
+.train .ph{border-radius:var(--r);overflow:hidden;min-height:240px;background:var(--line)}
+.train .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.train .box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:10px;align-content:start}
+.train .box h3{font-size:28px}
+@media (max-width:820px){.train{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero" role="img" aria-label="Blair Castle, Perthshire">
+  <span class="credit-tag">Blair Castle, Blair Atholl</span>
+  <div class="wrap">
+    <p class="eyebrow">Zwei Familien · Slowakei &amp; Österreich → Schottland</p>
+    <h1>Schottland <em>2027</em></h1>
+    <p class="lede">Fünf Nächte im Festival-Edinburgh, dann mit dem Zug in die Highlands und fünf Nächte in einer Lodge neben Blair Castle. Canyoning, Rafting und ein Berg für die Jugendlichen, zwei Tage am Berg für die Jäger, und das ganz ohne Auto.</p>
+    <div class="facts">
+      <div><b>11.–21. Aug.</b><span>Mi bis Sa, 2027</span></div>
+      <div><b>4 + 4</b><span>Erwachsene + Jugendliche (14–16)</span></div>
+      <div><b>5 + 5</b><span>Nächte Edinburgh + Atholl</span></div>
+      <div><b>≈ 14.550 €</b><span>ganze Reise, beide Familien</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Abschnitte">
+  <div class="wrap">
+    <a href="#route">Route</a><a href="#plan">Tag für Tag</a><a href="#hunting">Jagd</a><a href="#stay">Unterkunft</a><a href="#families">Für die Jugendlichen</a><a href="#budget">Kosten</a><a href="#videos">Videos</a><a href="#next">Nächste Schritte</a><a href="../" lang="en" hreflang="en">English</a>
+  </div>
+</nav>
+
+<main>
+<section id="route">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Die Route</p>
+      <h2>Edinburgh, dann mit dem Zug nach Norden</h2>
+      <p>Ein Direktzug am Montag, 16. August, rund 2 Stunden 10 Minuten auf der Highland Main Line, und derselbe Zug zurück am Samstag, 21. August. In Atholl gehen wir zu Fuß, nehmen den Bus 87 oder fahren eine Station mit dem Zug nach Pitlochry.</p>
+    </div>
+    <div class="route">
+      <svg viewBox="-60 0 1060 260" role="img" aria-label="Route: Edinburgh mit dem Zug über Perth, Dunkeld und Pitlochry nach Blair Atholl, mit Ausflügen nach Killiecrankie, zum House of Bruar und zum Rafting in Aberfeldy">
+        <path d="M940 200 C 860 200, 820 170, 720 160 S 560 120, 480 110 S 360 90, 300 80 S 220 70, 170 70" fill="none" stroke="var(--loch)" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 8"/>
+        <path d="M170 70 L 95 40 M170 70 L 235 125 M300 80 L 330 175" fill="none" stroke="var(--heather)" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"/>
+        <g><circle cx="940" cy="200" r="14" fill="var(--bracken)"/>
+          <text x="940" y="238" text-anchor="middle" font-weight="700" font-size="17">Edinburgh</text>
+          <text x="940" y="256" text-anchor="middle" class="small">5 Nächte · Tram</text></g>
+        <g><circle cx="720" cy="160" r="8" fill="var(--card)" stroke="var(--loch)" stroke-width="4"/>
+          <text x="720" y="135" text-anchor="middle" font-weight="600" font-size="15">Perth</text></g>
+        <g><circle cx="480" cy="110" r="8" fill="var(--card)" stroke="var(--loch)" stroke-width="4"/>
+          <text x="480" y="85" text-anchor="middle" font-weight="600" font-size="15">Dunkeld</text></g>
+        <g><circle cx="300" cy="80" r="9" fill="var(--card)" stroke="var(--loch)" stroke-width="4"/>
+          <text x="300" y="55" text-anchor="middle" font-weight="600" font-size="15">Pitlochry</text>
+          <text x="370" y="104" class="small">10 Min. von Blair Atholl</text></g>
+        <g><circle cx="170" cy="70" r="16" fill="var(--loch)"/>
+          <text x="150" y="112" text-anchor="end" font-weight="700" font-size="17">Blair Atholl</text>
+          <text x="150" y="131" text-anchor="end" class="small">Old Blair Lodge · 5 Nächte</text></g>
+        <g class="small">
+          <circle cx="95" cy="40" r="5" fill="var(--heather)"/><text x="20" y="24" class="small">House of Bruar · Bus 87</text>
+          <circle cx="235" cy="125" r="5" fill="var(--heather)"/><text x="200" y="152" class="small">Killiecrankie · Bus oder zu Fuß</text>
+          <circle cx="330" cy="175" r="5" fill="var(--heather)"/><text x="345" y="180" class="small">Aberfeldy Rafting · Taxi</text>
+        </g>
+        <text x="610" y="215" class="small">~2 Std. 10 Direktzug · bis zu 6 täglich</text>
+      </svg>
+    </div>
+    <div class="train">
+      <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/170430_-_Druimuachdar_Pass.jpg/1280px-170430_-_Druimuachdar_Pass.jpg" alt="ScotRail-Zug auf der Highland Main Line zwischen Moorhügeln" loading="lazy"></div>
+      <div class="box">
+        <p class="eyebrow">Warum der Zug</p>
+        <h3>Kein Neunsitzer, kein Linksverkehr</h3>
+        <p>Von Edinburgh Waverley nach Blair Atholl geht es direkt, ohne Umsteigen. ScotRail fährt bis zu 6 Züge am Tag (Montagsfahrplan), rund 2 Std. 8 Min., Spartarife ab 15,20 £ pro Strecke. Wir fahren an einem Montag und einem Samstag, also gilt der volle Werktagsfahrplan. Die Züge wählen wir, sobald der Ticketverkauf öffnet, etwa 12 Wochen vorher.</p>
+        <p>Die Lodge liegt nahe am Dorf und am Bahnhof. Lebensmittel kommen bis vor die Tür: Die Lodge nennt Lieferung von Tesco, Morrisons und ASDA. Eine Family &amp; Friends Railcard senkt die Erwachsenenpreise um ein Drittel und die Kinderpreise um 60 %.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plan" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Tag für Tag</p>
+      <h2>Elf Tage, zwei Kapitel</h2>
+    </div>
+
+    <div class="chapter">
+      <div class="plate"><img src="../img/castle.jpg" alt="Edinburgh Castle über den Bäumen der Princes Street Gardens"></div>
+      <div class="txt">
+        <p class="where">Kapitel 1 · Mi 11. – Mo 16. Aug.</p>
+        <h3>Edinburgh im Festivalmonat</h3>
+        <p>Das Fringe (6.–30. Aug.) und das Tattoo (6.–28. Aug.) laufen, die ganze Stadt ist eine Bühne. Tram, Bus und zu Fuß.</p>
+      </div>
+    </div>
+
+    <div class="days">
+      <article class="day">
+        <div class="date"><span class="d">11</span><span class="w">Mi · Aug.</span></div>
+        <div class="body"><h4>Ankunft</h4><ul>
+          <li><span class="chip all">Alle</span><span>Flug Wien oder Bratislava → Edinburgh (rund 2 Std. 50). Tram oder Taxi zur Wohnung.</span></li>
+          <li><span class="chip all">Alle</span><span>Abendspaziergang auf der Royal Mile mit den Fringe-Straßenkünstlern.</span></li></ul></div>
+        <div class="pic"><img src="../img/fringe.jpg" alt="Straßenkünstler und Publikum auf der Royal Mile" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">12</span><span class="w">Do · Aug.</span></div>
+        <div class="body"><h4>Burgtag</h4><ul>
+          <li><span class="chip all">Alle</span><span>Edinburgh Castle (online buchen), Camera Obscura, Picknick in den Princes Street Gardens.</span></li></ul>
+          <p class="note">Burg: 23,50 £ Erwachsene, 11,50 £ Kinder (7–15), Online-Preise 2026. 16-Jährige zahlen den Erwachsenenpreis.</p></div>
+        <div class="pic"><img src="../img/castle.jpg" alt="Edinburgh Castle" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">13</span><span class="w">Fr · Aug.</span></div>
+        <div class="body"><h4>Auf den Arthur's Seat</h4><ul>
+          <li><span class="chip all">Alle</span><span>Vormittags auf den Arthur's Seat, Holyrood Park, danach Dynamic Earth.</span></li>
+          <li><span class="chip all">Alle</span><span>Nachmittag im National Museum of Scotland (Eintritt frei).</span></li></ul></div>
+        <div class="pic"><img src="../img/arthur.jpg" alt="Arthur's Seat von Edinburgh Castle aus gesehen" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">14</span><span class="w">Sa · Aug.</span></div>
+        <div class="body"><h4>Königliche Jacht und das Tattoo</h4><ul>
+          <li><span class="chip all">Alle</span><span>Royal Yacht Britannia in Leith, danach Fringe-Familienshows.</span></li>
+          <li><span class="chip all">Optional</span><span>Military Tattoo auf der Castle Esplanade, Vorstellung um 18:15 Uhr (unter der Woche ab 21:30 Uhr).</span></li></ul>
+          <p class="note">Tattoo 2026: Erwachsene 42–119 £; Kinderpreise nicht veröffentlicht.</p></div>
+        <div class="pic"><img src="../img/tattoo.jpg" alt="Dudelsack-Bands beim Royal Edinburgh Military Tattoo" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">15</span><span class="w">So · Aug.</span></div>
+        <div class="body"><h4>Gärten und Strand</h4><ul>
+          <li><span class="chip all">Alle</span><span>Royal Botanic Garden (Eintritt frei), dann mit dem Bus an den Strand von Portobello.</span></li>
+          <li><span class="chip all">Alle</span><span>Abends eine Fringe-Familienshow, letzter Abend in der Stadt.</span></li></ul></div>
+        <div class="pic"><img src="../img/arthur.jpg" alt="Edinburgh von oben" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">16</span><span class="w">Mo · Aug.</span></div>
+        <div class="body"><h4>Mit dem Zug in die Highlands</h4><ul>
+          <li><span class="chip all">Alle</span><span>Direktzug Edinburgh Waverley → Blair Atholl, rund 2 Std. 10, über Perth, Dunkeld und Pitlochry.</span></li>
+          <li><span class="chip all">Alle</span><span>Nachmittag in den Gärten von Blair Castle. Old Blair Lodge ab 16:00 Uhr, Lebensmittel geliefert, Feuerstelle draußen.</span></li></ul></div>
+        <div class="pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Blair_Atholl_station.jpg/1280px-Blair_Atholl_station.jpg" alt="Bahnhof Blair Atholl" loading="lazy"></div>
+      </article>
+    </div>
+
+    <div class="chapter">
+      <div class="plate"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Blair_Castle_entrance_avenue_2017-05-27.jpg/1280px-Blair_Castle_entrance_avenue_2017-05-27.jpg" alt="Baumallee zum weißen Blair Castle"></div>
+      <div class="txt">
+        <p class="where">Kapitel 2 · Mo 16. – Sa 21. Aug.</p>
+        <h3>Fünf Nächte in Blair Atholl</h3>
+        <p>Basis: Old Blair Lodge auf den Atholl Estates, wenige hundert Meter von Blair Castle, mit freiem Eintritt in Burg und Gärten. Die beiden Jäger wechseln sich mit dem Pirschführer des Guts ab: Einer schießt, der andere geht mit, dann wird getauscht. Die Jugendlichen bekommen Canyoning, Wildwasser und einen Berg.</p>
+      </div>
+    </div>
+
+    <div class="days">
+      <article class="day">
+        <div class="date"><span class="d">17</span><span class="w">Di · Aug.</span></div>
+        <div class="body"><h4>Am Berg: Der erfahrene Jäger schießt</h4><ul>
+          <li><span class="chip hunt">Jäger</span><span>Mit dem Pirschführer von Atholl. Der erfahrene Jäger schießt; Marián geht ohne Waffe mit und erlebt zuerst eine ganze Pirsch. Bis zu 16 km zu Fuß.</span></li>
+          <li><span class="chip fam">Jugendliche</span><span>Canyoning an den Falls of Bruar mit Guide: Neoprenanzug, Rutschen, Sprünge und Abseilen durch die Schlucht (obere Fälle ab 14). Bus 87 zum House of Bruar.</span></li>
+          <li><span class="chip fam">Übrige</span><span>Wanderung an den Falls of Bruar, Geschäfte und Café im House of Bruar.</span></li></ul></div>
+        <div class="pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Lower_Falls%2C_Falls_of_the_Bruar%2C_Perth_and_Kinross.jpg/1280px-Lower_Falls%2C_Falls_of_the_Bruar%2C_Perth_and_Kinross.jpg" alt="Untere Fälle der Bruar" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">18</span><span class="w">Mi · Aug.</span></div>
+        <div class="body"><h4>Am Berg: Marián ist dran</h4><ul>
+          <li><span class="chip hunt">Jäger</span><span>Gleicher Pirschführer, Rollen getauscht: Marián schießt, der erfahrene Jäger geht ohne Waffe mit.</span></li>
+          <li><span class="chip fam">Familien</span><span>Bus 87 nach Killiecrankie: Schluchtwanderung und Soldier's Leap. Die Mutigen wagen den 40-m-Bungee-Sprung von der Garry Bridge (ab 14, ein Elternteil muss dabei sein). Nachmittags die Räume von Blair Castle.</span></li></ul></div>
+        <div class="pic"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Pass_of_Killiecrankie_-_geograph.org.uk_-_2687112.jpg" alt="Der River Garry im bewaldeten Pass of Killiecrankie" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">19</span><span class="w">Do · Aug.</span></div>
+        <div class="body"><h4>Wildwasser auf dem Tay</h4><ul>
+          <li><span class="chip all">Alle</span><span>Rafting auf dem River Tay ab Aberfeldy, alle acht, die Jäger auch. Rund 35 Minuten mit dem Taxi pro Strecke.</span></li></ul>
+          <p class="note">Reservetag für die Pirsch, falls das Wetter am Dienstag oder Mittwoch nicht mitspielt. Dann lassen die Jäger das Rafting aus.</p></div>
+        <div class="pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/White_water_rafting_at_Grandtully_%28geograph_2937856%29.jpg/1280px-White_water_rafting_at_Grandtully_%28geograph_2937856%29.jpg" alt="Ein Raft in den Stromschnellen bei Grandtully am River Tay" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">20</span><span class="w">Fr · Aug.</span></div>
+        <div class="body"><h4>Auf den Ben Vrackie</h4><ul>
+          <li><span class="chip all">Alle</span><span>Eine Station mit dem Zug nach Pitlochry und hinauf auf den Ben Vrackie (841 m), rund 4–5 Stunden hin und zurück ab Bahnhof, mit Blick über ganz Atholl.</span></li>
+          <li><span class="chip all">Oder</span><span>Ponytrekking im Blair Castle Trekking Centre oder Mountainbikes durchs Glen Tilt. Letzter Abend an der Feuerstelle.</span></li></ul></div>
+        <div class="pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Pitlochry_and_Ben_Vrackie_-_geograph.org.uk_-_7597538.jpg/1280px-Pitlochry_and_Ben_Vrackie_-_geograph.org.uk_-_7597538.jpg" alt="Ben Vrackie über Pitlochry" loading="lazy"></div>
+      </article>
+      <article class="day">
+        <div class="date"><span class="d">21</span><span class="w">Sa · Aug.</span></div>
+        <div class="body"><h4>Heimreise</h4><ul>
+          <li><span class="chip all">Alle</span><span>Auschecken bis 10:00 Uhr. Zug zurück nach Edinburgh (rund 2 Std. 10), Tram zum Flughafen (rund 35 Min.), Heimflug.</span></li></ul></div>
+        <div class="pic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/170430_-_Druimuachdar_Pass.jpg/1280px-170430_-_Druimuachdar_Pass.jpg" alt="Zug in den Highlands" loading="lazy"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="hunting" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Für die beiden Jäger · Atholl Estates</p>
+      <h2>Rothirsch in den Bergen von Atholl</h2>
+      <p>Angebot von Andrew Bruce Wootton, CEO der Atholl Estates (26. Okt. 2026): geführte Hirschpirsch, keine Vorerfahrung nötig, Gästewaffe kostenlos. Nur Hirsche: Rehwild gibt es in ihrem Revier kaum.</p>
+    </div>
+    <div class="hunt-grid">
+      <article class="hcard">
+        <img src="../img/stag.jpg" alt="Rothirsch">
+        <div class="in">
+          <p class="who">Der Plan · Di 17. + Mi 18. Aug.</p>
+          <h3>Abwechselnd, ein Hirsch für jeden</h3>
+          <ul class="kv">
+            <li><span>Di 17.: erfahrener Jäger schießt</span><span>Marián begleitet</span></li>
+            <li><span>Mi 18.: Marián schießt</span><span>Freund begleitet</span></li>
+            <li><span>Ziel</span><span>1 Hirsch je Jäger</span></li>
+            <li><span>Reservetag bei Schlechtwetter</span><span>Do 19.</span></li>
+            <li><span>Gästewaffe</span><span>kostenlos</span></li>
+          </ul>
+          <p style="font-size:14px;color:var(--muted)">Marián ist Anfänger ohne Jagdschein; Atholl hat bestätigt, dass keine Erfahrung nötig ist. Kondition für bis zu 16 km am Tag ist Pflicht.</p>
+        </div>
+      </article>
+      <article class="hcard">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Glen_Tilt_-_geograph.org.uk_-_3386931.jpg/1280px-Glen_Tilt_-_geograph.org.uk_-_3386931.jpg" alt="Offenes Bergland im Glen Tilt" loading="lazy">
+        <div class="in">
+          <p class="who">Was es kostet, beide Jäger, inkl. MwSt.</p>
+          <h3>Zwei Hirsche</h3>
+          <div class="price"><b class="num">2.280 £</b><span>≈ 2.720 €</span></div>
+          <ul class="kv">
+            <li><span>Di 17., Hirsch des erfahrenen Jägers</span><span>1.140 £ · ≈ 1.360 €</span></li>
+            <li><span>Mi 18., Mariáns Hirsch</span><span>1.140 £ · ≈ 1.360 €</span></li>
+            <li><span>Wer begleitet</span><span>0 £</span></li>
+            <li><span>Hirsch</span><span>950 £ + MwSt.</span></li>
+            <li><span>Tag ohne Abschuss</span><span>380 £ + MwSt.</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <div class="facts-band">
+      <div><b>Budgetiert</b>Die Kostentabelle rechnet mit einem Hirsch pro Jäger, 2.720 €, und nichts für den Begleiter. Ein Tag ohne Hirsch kostet weniger: 456 £ statt 1.140 £.</div>
+      <div><b>Preise</b>Berechnet pro Tag für den, der schießt: 950 £ + MwSt. mit Hirsch, 380 £ + MwSt. ohne. Tarif 2027.</div>
+      <div><b>Noch zu klären</b>Abwechselnd mit einem Pirschführer; keine Kosten für den Begleiter; Treffpunkt, Munition, angeschweißtes Wild, Trophäe.</div>
+    </div>
+  </div>
+</section>
+
+<section id="stay" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Unterkunft</p>
+      <h2>Eine Burg-Lodge für zwölf, eine Wohnung für acht</h2>
+    </div>
+    <div class="stay-grid">
+      <article class="farm">
+        <p class="eyebrow">Blair Atholl · Mo 16. – Sa 21. Aug.</p>
+        <h3>Old Blair Lodge</h3>
+        <span class="badge">Von Atholl empfohlen · Verfügbarkeit offen</span>
+        <p class="big">≈ 2.715 £ <span style="font-size:16px">≈ 3.240 € / 5 Nächte, geschätzt</span></p>
+        <ul>
+          <li>Für 12 Personen: Haupthaus für 10 plus Nebengebäude für 2</li>
+          <li>7 Schlafzimmer (3 Twin, 2 Kingsize-Doppel, 2 Einzel), 2 mit eigenem Bad</li>
+          <li>Holzofen, Feuerstelle, Geschirrspüler, Waschmaschine, WLAN; Babybetten und Hochstühle auf Anfrage</li>
+          <li>Freier Eintritt in Blair Castle &amp; Gardens, April bis Oktober</li>
+          <li>Mindestaufenthalt 3 Nächte; Check-in ab 16:00, Check-out bis 10:00 Uhr; Lebensmittellieferung</li>
+          <li>Die ganze Woche kostet 3.800 £ (2027). Der Preis für 5 Nächte ist nicht veröffentlicht: anteilig geschätzt</li>
+        </ul>
+        <a href="https://atholl-estates.co.uk/stay-with-us/highland-lodges/old-blair/" style="color:#f1c29a;font-weight:700" target="_blank" rel="noopener">Zur Lodge ↗</a>
+      </article>
+      <div class="flats">
+        <p class="eyebrow">Edinburgh · Mi 11. – Mo 16. Aug., 5 Nächte · noch zu buchen</p>
+        <div class="flat">
+          <h4>Luxury Family Flat, New Town</h4>
+          <p>Für 8 · 4 Schlafzimmer, 4 Bäder · 15 Min. zu Fuß zum Bahnhof Waverley, wo der Highland-Zug abfährt.</p>
+          <a href="https://homes-and-villas.marriott.com/en/properties/40719272-edinburgh-luxury-family-flat-in-edinburgh-new-town" target="_blank" rel="noopener">Termine und Preis prüfen ↗</a>
+        </div>
+        <div class="flat">
+          <h4>The Gait @ Hill Square</h4>
+          <p>Für 8 (+2) · 4 Schlafzimmer · Erdgeschoss, Southside nahe der Altstadt.</p>
+          <a href="https://www.reserveapartments.co.uk/apartments/154515-the-gait-hill-square" target="_blank" rel="noopener">Termine und Preis prüfen ↗</a>
+        </div>
+        <p style="font-size:14px;color:var(--muted)">Ohne Auto ist eine zentrale Wohnung nahe Waverley am besten. Preise erscheinen erst nach Eingabe der Daten. Budget: bis etwa 480 € pro Nacht. Wohnungen in der Festivalzeit sind früh weg, deshalb zuerst buchen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="families" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Während die Jäger unterwegs sind</p>
+      <h2>Für die Jugendlichen</h2>
+      <p>Alle vier sind 14–16, deshalb dreht sich die Woche um Wasser, Schluchten und einen Berg. Alles ist von der Lodge aus zu Fuß, mit Bus 87, mit dem Zug oder einem kurzen Taxi erreichbar. Bus 87 (Elizabeth Yule) fährt Pitlochry – Killiecrankie – Blair Atholl – House of Bruar, Montag bis Samstag.</p>
+    </div>
+    <div class="acts">
+      <article class="act"><div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Lower_Falls%2C_Falls_of_the_Bruar%2C_Perth_and_Kinross.jpg/1280px-Lower_Falls%2C_Falls_of_the_Bruar%2C_Perth_and_Kinross.jpg" alt="Falls of Bruar" loading="lazy"></div><p class="meta">Ab etwa 65 £ · Bus 87</p><h4>Canyoning, Falls of Bruar</h4><p>Geführt durch die Schlucht im Neoprenanzug: Rutschen, Sprünge und Abseilen. Obere Fälle ab 14, untere ab 12.</p></article>
+      <article class="act"><div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/White_water_rafting_at_Grandtully_%28geograph_2937856%29.jpg/1280px-White_water_rafting_at_Grandtully_%28geograph_2937856%29.jpg" alt="Rafting bei Grandtully" loading="lazy"></div><p class="meta">Etwa 55–60 £ p. P. · Taxi 35 Min.</p><h4>Rafting auf dem River Tay</h4><p>Ab Aberfeldy, ab 8 Jahren. Eine Tour für alle acht am Donnerstag.</p></article>
+      <article class="act"><div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Pitlochry_and_Ben_Vrackie_-_geograph.org.uk_-_7597538.jpg/1280px-Pitlochry_and_Ben_Vrackie_-_geograph.org.uk_-_7597538.jpg" alt="Ben Vrackie über Pitlochry" loading="lazy"></div><p class="meta">Gratis · Zug 10 Min.</p><h4>Ben Vrackie, 841 m</h4><p>Ein klarer Weg von Pitlochry bis zum Gipfel, rund 4–5 Stunden hin und zurück ab Bahnhof.</p></article>
+      <article class="act"><div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Pass_of_Killiecrankie_-_geograph.org.uk_-_2687112.jpg" alt="Pass of Killiecrankie" loading="lazy"></div><p class="meta">Schlucht gratis · Bungee etwa 89 £</p><h4>Killiecrankie: Schlucht und Bungee</h4><p>Schluchtwanderung und Soldier's Leap. 40-m-Bungee von der Garry Bridge, ab 14, mit einem Elternteil vor Ort.</p></article>
+      <article class="act"><div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Blair_Castle%2C_Perthshire_-_geograph.org.uk_-_5918886.jpg/1280px-Blair_Castle%2C_Perthshire_-_geograph.org.uk_-_5918886.jpg" alt="Blair Castle" loading="lazy"></div><p class="meta">Gratis für Lodge-Gäste · zu Fuß</p><h4>Blair Castle &amp; Gardens</h4><p>Sonst 65 £ für eine Familie (2 + 3) online. Prunkräume, ummauerter Hercules Garden, Diana's Grove mit hohen Bäumen.</p></article>
+      <article class="act"><div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Glen_Tilt_-_geograph.org.uk_-_3386931.jpg/1280px-Glen_Tilt_-_geograph.org.uk_-_3386931.jpg" alt="Glen Tilt" loading="lazy"></div><p class="meta">Preis auf Anfrage · im Dorf</p><h4>Ponys und Mountainbikes</h4><p>Blair Castle Trekking Centre (Tel. 01796 481568) und Fahrradverleih im Dorf für die Wege im Glen Tilt.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="budget" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Was es kostet · 1 £ = 1,194 €</p>
+      <h2>Rund 14.550 € für alles</h2>
+      <p>Die Pirsch nach den Preisen von Atholl für 2027: ein Hirsch pro Jäger, nichts für den Begleiter. Der Rest sind Schätzungen bis zur Buchung. Kein Mietauto nötig.</p>
+    </div>
+    <div class="budget">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Posten</th><th></th><th class="r">EUR</th></tr></thead>
+          <tbody>
+            <tr><td>Flüge, 8 × hin und zurück, Wien oder Bratislava</td><td><span class="st e">Schätzung</span></td><td class="r">2.150</td></tr>
+            <tr><td>Wohnung Edinburgh, 5 Nächte</td><td><span class="st e">Schätzung</span></td><td class="r">2.390</td></tr>
+            <tr><td>Tram, Bus und Taxi in Edinburgh, inkl. Flughafen</td><td><span class="st e">Schätzung</span></td><td class="r">280</td></tr>
+            <tr><td>Zug Edinburgh ⇄ Blair Atholl, 8 Personen</td><td><span class="st e">Schätzung</span></td><td class="r">300</td></tr>
+            <tr><td>Bus 87, Zug nach Pitlochry, Taxis in Atholl inkl. Aberfeldy</td><td><span class="st e">Schätzung</span></td><td class="r">450</td></tr>
+            <tr><td>Old Blair Lodge, 5 Nächte (anteilig von 3.800 £/Woche)</td><td><span class="st e">Schätzung</span></td><td class="r">3.240</td></tr>
+            <tr><td>Aktivitäten (Edinburgh Castle, Britannia, Canyoning für 4, Rafting für 8, Ponys, Räder)</td><td><span class="st e">Schätzung</span></td><td class="r">1.370</td></tr>
+            <tr><td>Essen, meist selbst gekocht</td><td><span class="st e">Schätzung</span></td><td class="r">1.530</td></tr>
+            <tr><td>Pirsch, ein Hirsch pro Jäger, Begleiter gratis, inkl. MwSt.</td><td><span class="st q">Angebot</span></td><td class="r">2.720</td></tr>
+            <tr><td>Trinkgeld für die Pirschführer</td><td><span class="st e">Schätzung</span></td><td class="r">120</td></tr>
+            <tr class="total"><td>Gesamt</td><td></td><td class="r">≈ 14.550</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="split">
+        <div class="box accent"><span>Pro Familie, gemeinsame Kosten</span><b>≈ 5.855 €</b><span>Alles außer der Jagd, durch zwei geteilt</span></div>
+        <div class="box"><span>Jagd, zahlen die Jäger</span><b>≈ 2.840 €</b><span>≈ 1.360 € pro Jäger für einen Hirsch · Trinkgeld 120 €</span></div>
+        <div class="box">
+          <span>Wohin das Geld geht</span>
+          <div class="bar" role="img" aria-label="Aufteilung: Unterkunft 39 Prozent, Reise 22 Prozent, Jagd 20 Prozent, Essen 11 Prozent, Aktivitäten 9 Prozent">
+            <i style="width:38.7%;background:var(--loch)"></i><i style="width:21.9%;background:var(--bracken)"></i><i style="width:19.5%;background:var(--heather)"></i><i style="width:10.5%;background:var(--moss)"></i><i style="width:9.4%;background:var(--muted)"></i>
+          </div>
+          <div class="legend"><span><i style="background:var(--loch)"></i>Unterkunft</span><span><i style="background:var(--bracken)"></i>Reise</span><span><i style="background:var(--heather)"></i>Jagd</span><span><i style="background:var(--moss)"></i>Essen</span><span><i style="background:var(--muted)"></i>Aktivitäten</span></div>
+        </div>
+        <p style="font-size:14px;color:var(--muted)">Nicht enthalten: Tattoo-Tickets (optional, 8 × 42–119 £), der Bungee-Sprung in Killiecrankie (optional, etwa 89 £ pro Person), ein zweiter Hirsch für einen der Jäger (1.140 £ inkl. MwSt., ≈ 1.360 €), Reiseversicherung. Vermietet Atholl nur wochenweise, kostet die Lodge 1.300 € mehr.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="videos" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Zur Einstimmung</p>
+      <h2>Vorher anschauen</h2>
+      <p>Jede Karte öffnet YouTube in einem neuen Tab.</p>
+    </div>
+    <div class="vids">
+      <a class="vid" style="background-image:url('../img/tattoo.jpg')" href="https://www.youtube.com/results?search_query=Royal+Edinburgh+Military+Tattoo" target="_blank" rel="noopener"><i class="play"></i><span>Das Royal Edinburgh Military Tattoo</span></a>
+      <a class="vid" style="background-image:url('../img/fringe.jpg')" href="https://www.youtube.com/results?search_query=Edinburgh+Fringe+Royal+Mile+street+performers" target="_blank" rel="noopener"><i class="play"></i><span>Fringe-Straßenshows auf der Royal Mile</span></a>
+      <a class="vid" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/170430_-_Druimuachdar_Pass.jpg/1280px-170430_-_Druimuachdar_Pass.jpg')" href="https://www.youtube.com/results?search_query=Highland+Main+Line+train+Edinburgh+Pitlochry+Blair+Atholl" target="_blank" rel="noopener"><i class="play"></i><span>Mit dem Zug auf der Highland Main Line</span></a>
+      <a class="vid" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Blair_Castle%2C_Perthshire_-_geograph.org.uk_-_5918886.jpg/1280px-Blair_Castle%2C_Perthshire_-_geograph.org.uk_-_5918886.jpg')" href="https://www.youtube.com/results?search_query=Blair+Castle+Atholl+Estates" target="_blank" rel="noopener"><i class="play"></i><span>Blair Castle und die Atholl Estates</span></a>
+      <a class="vid" style="background-image:url('../img/stag.jpg')" href="https://www.youtube.com/results?search_query=red+stag+stalking+Atholl+Highlands" target="_blank" rel="noopener"><i class="play"></i><span>Rothirschpirsch in den Highlands</span></a>
+      <a class="vid" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Lower_Falls%2C_Falls_of_the_Bruar%2C_Perth_and_Kinross.jpg/1280px-Lower_Falls%2C_Falls_of_the_Bruar%2C_Perth_and_Kinross.jpg')" href="https://www.youtube.com/results?search_query=canyoning+Falls+of+Bruar" target="_blank" rel="noopener"><i class="play"></i><span>Canyoning an den Falls of Bruar</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="next" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Nächste Schritte</p>
+      <h2>Was noch zu buchen ist</h2>
+    </div>
+    <ul class="todo">
+      <li><i class="dot" style="background:var(--bracken)"></i><div><b>Old Blair Lodge und Pirsch bei Atholl</b><span>Old Blair für Mo 16. – Sa 21. Aug. (5 Nächte) samt Preis anfragen; einen Pirschführer für Di 17. und Mi 18. buchen, die Jäger wechseln sich ab, der Begleiter ohne Aufpreis, Do 19. als Reserve; fragen, wo uns der Pirschführer trifft.</span></div></li>
+      <li><i class="dot" style="background:var(--bracken)"></i><div><b>Canyoning und Rafting</b><span>Canyoning an den Falls of Bruar für die vier Jugendlichen am Di 17.; Rafting auf dem Tay ab Aberfeldy für alle acht am Do 19. Bei beiden Anbietern nach Treffpunkt und Abholung in Blair Atholl fragen.</span></div></li>
+      <li><i class="dot" style="background:var(--bracken)"></i><div><b>Wohnung in Edinburgh, 11.–16. Aug., 5 Nächte</b><span>Festivalwoche. Zentral, nahe Bahnhof Waverley.</span></div></li>
+      <li><i class="dot" style="background:var(--heather)"></i><div><b>Zugtickets</b><span>Spartarife gibt es etwa 12 Wochen vorher (Ende Mai 2027). Vorher eine Family &amp; Friends Railcard kaufen.</span></div></li>
+      <li><i class="dot" style="background:var(--heather)"></i><div><b>Tattoo-Tickets, Sa 14. Aug., 18:15 Uhr</b><span>Optional. Im Verkauf auf edintattoo.co.uk.</span></div></li>
+      <li><i class="dot" style="background:var(--muted)"></i><div><b>Flüge</b><span>Hin Mi 11. Aug., zurück Sa 21. Aug. am Nachmittag oder Abend, nach dem Zug aus Blair Atholl.</span></div></li>
+      <li><i class="dot" style="background:var(--muted)"></i><div><b>Lebensmittellieferung für Mo 16. Aug.</b><span>Tesco, Morrisons oder ASDA zur Old Blair Lodge.</span></div></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Preise wie angeboten oder veröffentlicht im Oktober 2026; Schätzungen sind gekennzeichnet. Geplant von Marián Janočko.</p>
+    <p>Fotos von Wikimedia Commons: Blair Castle von Andrew Tryon (CC BY-SA 2.0); Allee zu Blair Castle von August Schwerdfeger (CC BY 4.0); Zug auf der Highland Main Line von 96tommy (CC BY 2.0); Bahnhof Blair Atholl von John Armitstead (CC BY-SA 3.0); Pass of Killiecrankie von nick macneill (CC BY-SA 2.0); Glen Tilt von Euan Nelson (CC BY-SA 2.0); Falls of Bruar von Rosser1954 (CC BY-SA 4.0); Rafting bei Grandtully von David Baird (CC BY-SA 2.0); Pitlochry und Ben Vrackie von Richard Webb (CC BY-SA 2.0); Edinburgh Castle von Lauren (CC BY-SA 2.0); Straßenkünstler auf der Royal Mile von Lirazelf (CC BY-SA 4.0); Tattoo von David Dixon (CC BY-SA 2.0); Arthur's Seat von Kim Traynor (CC BY-SA 2.0); Rothirsch, abgeleitetes Werk von Massimo Catarinella (CC BY-SA 3.0). <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">commons.wikimedia.org</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
